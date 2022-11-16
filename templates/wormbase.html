@@ -1,0 +1,48 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} wormbase {% endblock %}
+{% block content %}
+<div class="container">
+    {% csrf_token %}
+    <script>csrf_token= "{{ csrf_token }}"</script>
+
+    <div class="card mt-5 w-100">
+        <div class="card-header fs-5 fw-bold">
+        Gene / Transcript ID Input
+        </div>
+
+        <div class='card-body'>
+            <form id="ajax_wormbase">
+                <label for="wormbase_search" class="form-label">Gene ID / Transcript ID / Other Name / ene Name :</label>  <!--label 內的 for 與 input 內的 name 必須相同 -->
+                <input type="text" class="form-control" name="wormbase_search" placeholder=" Name">
+            </form>
+            <hr>
+            <button class="btn btn-outline-primary" id="submit_wormbase">送出</button>
+        </div>
+        <div id = "Answer"></div>
+
+        <div class='card-body'>
+            <form id="ajax_form">
+                <label for="gene_id" class="form-label">Gene ID / Transcript ID :</label>  <!--label 內的 for 與 input 內的 name 必須相同 -->
+                <input type="text" class="form-control" name="gene_id" placeholder="WBGene00000010 or M79.1c.1">
+            </form>
+            <hr>
+            <button class="btn btn-outline-primary" id="submit">送出</button>
+        </div>
+        <div  id="message"></div>
+        <!-- crawler -->
+        <div class="card-header fs-5 fw-bold">Transcript ID Input </div>
+        <div class="card-body">
+            <form id = 'ajax_crawler'>
+                <label for="transcript_search" class="form-label"></label>
+                <input type="text" class="form-control" name="transcript_search" placeholder="M79.1c.1">
+            </form>
+            <hr>
+            <button class="btn btn-outline-primary" id = submit1>搜尋</button>
+        </div>
+        <div  id="message1"></div>
+    </div>
+    <script src="{% static 'js/form.js' %}"></script>
+</div>
+{% endblock %}

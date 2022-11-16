@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>summer vacation exercise</title>
+    
+    <link rel="stylesheet" href="../static/css/summer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+    <script src="../static/js/summer.js"></script> 
+</head>
+<body>
+    <h1>Summer Vacation Exercise</h1>
+    {% csrf_token %}
+    <p>輸入</p>
+    <p id='input'><textarea id='name_input' rows="12" cols="50"></textarea></p>
+    <p><button id="ex_1">十個範例</button><button id="ex_2">五百個範例</button></p>
+    <p><button id="submit">除錯分析</button></p>
+    <p><button id="domain_analyze">p-value分析</button></p>
+    <div id='type_select'>
+        <div>P-value (type)
+        <select class="form-select" id="P_type">
+            <option value="none" selected>None</option>
+            <option value="fdr">FDR</option>
+            <option value="bonferroni">Bonferroni</option>
+        </select>
+        <select class="form-select" id="cut_off">
+            <option value="0.05">0.05</option>
+            <option value="0.01" selected>0.01</option>
+            <option value="0.001">0.001</option>
+        </select>P-value (cut_off)</div>
+    </div>
+    <div id='output'></div>
+</body>
+</html>

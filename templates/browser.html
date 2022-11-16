@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} browser {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+
+<div class="container">
+    {% csrf_token %}
+    <script>csrf_token= "{{ csrf_token }}"</script>
+    <div class="card mt-5 w-100">
+        <div id ="mode1" class='card-body '>
+            <form class="myform" method="post">
+            <div class="form-check w-50">
+                <input class="form-check-input" type="checkbox" value="Coding transcript" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Coding transcript
+                </label>
+            </div>
+            <div class="form-check w-50">
+                <input class="form-check-input" type="checkbox" value="non coding transcript" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                    non coding transcript
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="scRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                scRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="snRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                snRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="snoRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                snoRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="tRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                tRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="rRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                rRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="ncRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                ncRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="7kncRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                7kncRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="asRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                asRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="circRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                circRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="lineRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                lineRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="piRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                piRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="miRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                miRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="miRNA primary transcript" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                miRNA primary transcript
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="pre miRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                pre miRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="Transposon ncRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                Transposon ncRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="Transposon-mRNA" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                Transposon-mRNA
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="Transposon Pseudogene" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                Transposon Pseudogene
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="Pseudogene" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                Pseudogene
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="rRNA pseudogene" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                rRNA Pseudogene
+                </label>
+            </div>
+            <div class="form-check w-25">
+                <input class="form-check-input" type="checkbox" value="tRNA pseudogene" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                tRNA Pseudogene
+                </label>
+            </div>
+            </div>
+            <hr/>
+            <input class="btn btn-outline-primary"type="submit" value="Submit" />
+            <hr/>
+            <div id="type1"></div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'js/browser.js' %}"></script>
+</div>
+{% endblock %}

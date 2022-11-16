@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} wormbase {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="../../static/css/style.css" />
+
+<div class="container">
+    {% csrf_token %}
+    <script>csrf_token= "{{ csrf_token }}"</script>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Spilced Gene
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="flex_container">
+                    <div class="tag1"></div>
+                    <div id="spliced" class="jss92"></div>
+                    <div id="spliced_table" class="w-20 p-3"></div>
+                </div>
+            </div>
+            <div class="stack_spliced"></div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+            Unspliced Gene
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="flex_container">
+                <div class="tag2"></div>
+                <div id="unspliced" class="jss92"></div>
+                <div id="unspliced_table" class="w-20 p-3"></div>
+            </div>
+            <div class="stack_unspliced"></div>
+
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            CDS
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                <div class="flex_container">
+                    <div class="tag3"></div>
+                    <div id="cds" class="cds"></div>
+                    <div class="tag4"></div>
+                    <div class="cds_sequence"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/detail.js'%}"></script>
+</div>
+{% endblock %}

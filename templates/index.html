@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} home {% endblock %}
+{% block content %}
+<div class="container">
+    <a href = 'http://127.0.0.1:8000/wormbase/' >
+        <button type="button" class="btn btn-link">wormbase_search</button>
+    </a>
+    <a href = 'http://127.0.0.1:8000/pirscan/' >
+        <button type="button" class="btn btn-link">pirscan</button>
+    </a>
+    <a href = 'http://127.0.0.1:8000/search/' >
+        <button type="button" class="btn btn-link">Search</button>
+    </a>
+    <a href = 'http://127.0.0.1:8000/browser/' >
+        <button type="button" class="btn btn-link">Browser</button>
+    </a>
+</div>
+{% endblock %}

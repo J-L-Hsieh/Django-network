@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} pirScan {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+
+<div class="container">
+    {% csrf_token %}
+    <script>csrf_token= "{{ csrf_token }}"</script>
+    <div class="card mt-5 w-100">
+        <div class="card-header fs-5 fw-bold">
+        Input
+        </div>
+        <div class='card-body'>
+            <form id="pirscan">
+                <label for="search" class="form-label">Coding Transcript</label>  <!--label 內的 for 與 input 內的 name 必須相同 -->
+                <input type="text" class="form-control" name="search" placeholder=" Name">
+            </form>
+            <hr>
+            <button class="btn btn-outline-primary" id="pirscan_input">送出</button>
+        </div>
+        <div id = "pirscan_result"></div>
+    </div>
+    <script src="{% static 'js/pirscan.js' %}"></script>
+</div>
+{% endblock %}

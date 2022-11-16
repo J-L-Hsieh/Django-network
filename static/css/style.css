@@ -1,0 +1,92 @@
+span{
+  font-family:monospace;
+  letter-spacing:2px;
+  font-size: 14px;
+  line-height: 1.3em;
+
+}
+.flex_checkbox{
+  display: flex;
+}
+.flex_container{
+  display: flex;
+  margin-left: 2em;
+}
+.five_prime_UTR{
+
+  background-color: gray;
+}
+.three_prime_UTR{
+
+  background-color: gray;
+}
+.exon_odd{
+  background-color: yellow;
+}
+.exon_even{
+  background-color: orange;
+}
+
+.jss92 span:nth-child(10n) {
+margin-right: 1em;
+}
+.cds_sequence{
+  margin-left: 1em;
+}
+.cds_sequence span:nth-child(3n) {
+  margin-right: 1em;
+  }
+.cds_sequence span:nth-child(60n+1):before {
+  content: "";
+  display: block;
+}
+.cds{
+  margin-left: 1em;
+}
+.cds span:nth-child(10n) {
+  margin-right: 1em;
+  }
+.cds span:nth-child(20n+1):before {
+  content: "";
+  display: block;
+}
+.stack1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stack2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width:959.95px) {
+.jss92 span:nth-child(20n+1):before {
+content: "";
+display: block;
+}
+}
+@media (min-width:960px) {
+.jss92 span:nth-child(50n+1):before {
+content: "";
+display: block;
+}
+}
+.jss92 {
+flex: 0 1 0;
+margin-left: 1em;
+}
+.rowyellow{
+  background-color: yellow !important;
+}
+
+/* pirscan --------------------------------------*/
+#g{
+  background-color: green;
+}
+#b{
+  background-color: lightblue;
+}
+#L{
+  color: red;
+}

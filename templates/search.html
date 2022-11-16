@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} search {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+
+<div class="container">
+    {% csrf_token %}
+    <script>csrf_token= "{{ csrf_token }}"</script>
+    <div class="card mt-5 w-100">
+        <div id ="mode1" class='card-body'>
+            <form id="search_mode1">
+                <label for="search1" class="form-label">WB ID / Tanscript / Gene name</label>
+                <input type="text" class="form-control" name="search1" placeholder=" Name">
+            </form>
+            <hr>
+            <button class="btn btn-outline-primary" id="submit_mode1">送出</button>
+        </div>
+        <div id="Answer1"></div>
+        <div id="Answer2"></div>
+    </div>
+    <script src="{% static 'js/search.js' %}"></script>
+</div>
+{% endblock %}
