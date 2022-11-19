@@ -47,8 +47,10 @@ def domain(request,pk):
     return render(request,'domain.html',locals())
 def yeast(request):
     return render(request,'yeast_browse.html',locals())
-def yeast_detail_base(request):
-    return render(request,'yeast_detail.html',locals())
+def yeast_associated_base(request):
+    return render(request,'yeast_associated.html',locals())
+def yeast_name_base(request):
+    return render(request,'yeast_name.html',locals())
 # --------------------------------------------------------------------------------------------
 def ajax_wormbase(request):
     name = request.POST['wormbase_search']
@@ -419,8 +421,8 @@ def yeast_browser(request):
     response = {'table':table}
     return JsonResponse(response)
 
-
-def yeast_detail(request):
+'''------------------------------------主物種與其他物種的關係數量---------------------------------'''
+def yeast_associated(request):
     # print(request)
     table_name = request.POST.get('table_name')
     row_name = request.POST.get('row_name')
@@ -432,11 +434,41 @@ def yeast_detail(request):
         table = pd.read_sql('%s' %select, connect)
     finally:
         connect.close()
-    #刪除不必要的欄位()
+    '''---------------------刪除不必要的欄位------------------------'''
     associated_table = table.dropna(axis='columns')
     all_tables = associated_analysis(associated_table)
     associated_table = associated_table.drop(['count','SystematicName'],axis=1)
     #拿出column name
     associated_table = associated_table.to_html(table_id='associated_table',index= None,classes="table table-striped table-bordered")
     response={'associated_table':associated_table , 'all_tables':all_tables}
+    return JsonResponse(response)
+'''------------------------------------------------------------------------------------------'''
+def yeast_name(request):
+    first_feature = request.POST.get('first_feature')
+    second_feature = request.POST.get('second_feature')
+    first_feature = first_feature.split(':')
+    second_feature = second_feature.split(':')
+    # print(first_feature)
+    try:
+        connect = sqlite3.connect('db.sqlite3')
+        for  i in range(2):
+            if i == 1:
+                select = 'SELECT count,SystematicName FROM ' + first_feature[0] +'_all WHERE '+first_feature[0] +" IN ('" +first_feature[1] +"')"
+                first_table = pd.read_sql('%s' %select, connect)
+                print(select)
+
+            select = 'SELECT count,SystematicName FROM ' + second_feature[0] +'_all WHERE '+second_feature[0] +" IN ('" +second_feature[1] +"')"
+            second_table = pd.read_sql('%s' %select, connect)
+    finally:
+        connect.close()
+
+    first_names = eval(first_table.iat[0,1])
+    second_names = eval(second_table.iat[0,1])
+    print(type(len(second_names)))
+    first_name_table = pd.DataFrame(list(zip(first_names,['true']*len(first_names))),columns=['all','%s'%first_feature[1]])
+    second_name_table = pd.DataFrame(list(zip(second_names,['true']*len(second_names))),columns=['all','%s'%second_feature[1]])
+    df_merge = pd.merge(first_name_table,second_name_table,how="outer")
+    df_merge = df_merge.fillna('false').to_html(table_id='both_name_table',index=None,classes='table table-striped table-bordered')
+
+    response = {'df_merge':df_merge}
     return JsonResponse(response)

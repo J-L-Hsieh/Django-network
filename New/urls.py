@@ -29,7 +29,8 @@ urlpatterns = [
 
     path('yeast',views.yeast),
     path('yeast/ajax_yeast_browser/',views.yeast_browser),
-    path('yeast/ajax_detail/',views.yeast_detail),
-    path('yeast/detail/',views.yeast_detail_base),
-
+    path('yeast/ajax_associated/',views.yeast_associated),
+    path('yeast/associated/',views.yeast_associated_base),
+    path('yeast/associated/detail/',views.yeast_name_base),
+    path('yeast/ajax_name/',views.yeast_name),
 ]

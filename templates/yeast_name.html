@@ -42,25 +42,17 @@
             <div class="col-10 mx-auto">
             {% csrf_token %}
                 <div class="card mb-3">
-                    <div id="queried"  class="card-header fs-5 fw-bold"></div>
+                    <div class="card-header fs-5 fw-bold">
+                        <div id="first"></div>
+                        <div id="second"></div>
+                    </div>
                     <div id="associated_title" class='card-body'></div>
                     <div class="flexbox">
                         <div id="Answer1" style="width: 90%;"></div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="col-10 mx-auto">
-            {% csrf_token %}
-                <div class="card mb-3">
-                    <div class="card-header fs-5 fw-bold"></div>
-                    <div class='card-body'></div>
-                    <div class="flexbox">
-                        <div id="Answer2"></div>
-                </div>
-            </div>
-        </div>
     </body>
     <script>csrf_token= "{{ csrf_token }}"</script>
-    <script src="{% static 'js/yeast_detail.js'%}"></script>
+    <script src="{% static 'js/yeast_name.js'%}"></script>
 </html>

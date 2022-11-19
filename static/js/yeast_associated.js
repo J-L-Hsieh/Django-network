@@ -14,7 +14,7 @@ $(document).ready(function(){
     console.log(row_name)
 
     $.ajax({
-        url : '/yeast/ajax_detail/',
+        url : '/yeast/ajax_associated/',
         data : {'table_name' : table_name,'row_name':row_name},
         success:function(response){
             $('#Answer1').html(response.associated_table);
@@ -27,7 +27,16 @@ $(document).ready(function(){
             $('#Answer2').html(add_html)
             for (i=0 ;i< column_order.length;i++){
                 $(`#${column_order[i]}`).html(response.all_tables[column_order[i]])
-                $(`#${column_order[i]}_table`).DataTable()
+                $(`#${column_order[i]}_table`).DataTable({
+                    'columnDefs':[
+                        {   'targets':-1,
+                            'data':null,
+                            render:function(row){
+                                return '<a href = "/yeast/associated/detail/?id='+ table_name + ':' + row_name +'&name='+ column_order[i]+ ':' +row[1]+'"> Detail </a>';
+                            },
+                        }
+                    ]
+                })
             }
         },
         error :function(){

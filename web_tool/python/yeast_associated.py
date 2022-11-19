@@ -29,11 +29,13 @@ def associated_analysis(associated_table):
                 result_list = yeast_enrichment(queried_name,domain_name)
                 result_list.insert(0,queried_feature)
                 result_list.insert(1,j)
+                result_list.insert(7,'-')
                 # print(result_list)
+                #將每一列的資訊放進同一個list中,之後做成datatable
                 table.append(result_list)
             finally:
                 connect.close()
-        columns_title = ['Queried %s Term(A)' %queried_feature,'Associated %s Term(B)' %i,'#of genes in A','#of genes in B','#of genes in A∩B', '#of genes in yeast','Signficance of Associated(p-value)']
+        columns_title = ['Queried %s Term(A)' %queried_feature,'Associated %s Term(B)' %i,'#of genes in A','#of genes in B','#of genes in A∩B', '#of genes in yeast','Signficance of Associated(p-value)','Detail']
         print(pd.DataFrame(table,columns=columns_title))
         df_tables = pd.DataFrame(table,columns=columns_title).to_html(table_id='%s_table'%i,index= None,classes="table table-striped table-bordered")
         response['%s'%i] = df_tables
