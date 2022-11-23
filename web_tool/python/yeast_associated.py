@@ -12,10 +12,12 @@ def associated_analysis(associated_table):
     associated_table.drop(associated_table.columns[[0,1,2]],axis=1,inplace=True)
     column_name = associated_table.columns.values.tolist()
     column_order = column_name[0:]
+    '''------------------回傳資料為各個table及column的順序--------------------'''
     response ={}
+
     for i in column_name:
-        print(i)
-        print(associated_table.at[0,'%s' %i])
+        # print(i)
+        # print(associated_table.at[0,'%s' %i])
         domain_name = eval(associated_table.at[0,'%s' %i])
         table = []
         for j in domain_name:
@@ -35,11 +37,12 @@ def associated_analysis(associated_table):
                 table.append(result_list)
             finally:
                 connect.close()
-        columns_title = ['Queried %s Term(A)' %queried_feature,'Associated %s Term(B)' %i,'#of genes in A','#of genes in B','#of genes in A∩B', '#of genes in yeast','Signficance of Associated(p-value)','Detail']
-        print(pd.DataFrame(table,columns=columns_title))
+        columns_title = ['Queried %s Term(A)' %queried_feature,'Associated %s Term(B)' %i,'A','B','C', 'D','Signficance of Associated(p-value)','Detail']
+        # print(pd.DataFrame(table,columns=columns_title))
         df_tables = pd.DataFrame(table,columns=columns_title).to_html(table_id='%s_table'%i,index= None,classes="table table-striped table-bordered")
         response['%s'%i] = df_tables
         response['column_order'] = column_order
+        # print(column_order)
     # print(response)
     return response
 
@@ -93,7 +96,7 @@ def yeast_enrichment(queried_name,domain_name):
     result = result[result["FDR"]<=0.01]
 
     response = []
-    response.extend([len(queried_name),len(domain_name),A,6611,result.iat[0,1]])
+    response.extend([A,len(queried_name),len(domain_name),6611,result.iat[0,1]])
     # print(response)
 
     return response

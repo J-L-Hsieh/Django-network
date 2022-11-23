@@ -455,7 +455,7 @@ def yeast_name(request):
             if i == 1:
                 select = 'SELECT count,SystematicName FROM ' + first_feature[0] +'_all WHERE '+first_feature[0] +" IN ('" +first_feature[1] +"')"
                 first_table = pd.read_sql('%s' %select, connect)
-                print(select)
+                # print(select)
 
             select = 'SELECT count,SystematicName FROM ' + second_feature[0] +'_all WHERE '+second_feature[0] +" IN ('" +second_feature[1] +"')"
             second_table = pd.read_sql('%s' %select, connect)
