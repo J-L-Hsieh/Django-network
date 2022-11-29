@@ -15,6 +15,8 @@ from urllib import response
 from webbrowser import get
 from web_tool.python.enrichment import enrichment_program
 from web_tool.python.yeast_associated import associated_analysis
+from web_tool.python.yeast_network import network
+
 # import web_tool.python.enrichment_program
 
 
@@ -403,8 +405,8 @@ def enrichment_analysis(request):
 def yeast_browser(request):
     table_name = request.POST.get('first_feature')
     table_column = request.POST.get('other_feature')[:-1]
-    table_column = 'SELECT '+ table_name+ ',' + table_column
-    table_name = 'FROM '+ table_name +'_all'
+    table_column = "SELECT "+ table_name+ "," + table_column
+    table_name = "FROM "+ table_name +"_all"
     print(table_column)
     print(table_name)
     try:
@@ -426,10 +428,9 @@ def yeast_associated(request):
     # print(request)
     table_name = request.POST.get('table_name')
     row_name = request.POST.get('row_name')
-
     try:
         connect = sqlite3.connect('db.sqlite3')
-        select = 'SELECT * FROM ' + table_name +'_all WHERE '+table_name +" IN ('" +row_name +"')"
+        select = "SELECT * FROM " + table_name +"_all WHERE "+table_name +" IN ('" +row_name +"')"
         print(select)
         table = pd.read_sql('%s' %select, connect)
     finally:
@@ -437,10 +438,11 @@ def yeast_associated(request):
     '''---------------------刪除不必要的欄位------------------------'''
     associated_table = table.dropna(axis='columns')
     all_tables = associated_analysis(associated_table)
+    network_data = network(associated_table)
     associated_table = associated_table.drop(['count','SystematicName'],axis=1)
     #拿出column name
     associated_table = associated_table.to_html(table_id='associated_table',index= None,classes="table table-striped table-bordered")
-    response={'associated_table':associated_table , 'all_tables':all_tables}
+    response={'associated_table':associated_table , 'all_tables':all_tables, 'network_data':network_data}
     return JsonResponse(response)
 '''------------------------------------------------------------------------------------------'''
 def yeast_name(request):

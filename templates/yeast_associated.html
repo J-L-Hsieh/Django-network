@@ -23,6 +23,9 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
+        <!-- vis.js -->
+        <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
         <title>
             {% block title %} Yeast Feature Association Database{% endblock %}
         </title>
@@ -31,6 +34,10 @@
             display:flex;
             align-items:center;
             justify-content:center;
+        }
+        #mynetwork {
+        width: 1000px;
+        height: 600px;
         }
         </style>
     </head>
@@ -46,6 +53,10 @@
                     <div id="associated_title" class='card-body'></div>
                     <div class="flexbox">
                         <div id="Answer1" style="width: 90%;"></div>
+                    </div>
+                    <div class="flexbox">
+                        <div id="mynetwork"></div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -10,6 +10,7 @@ def associated_analysis(associated_table):
     queried_name = associated_table.iat[0,2]
     '''------------------------------------------------------------------'''
     associated_table.drop(associated_table.columns[[0,1,2]],axis=1,inplace=True)
+    # print(associated_table)
     column_name = associated_table.columns.values.tolist()
     column_order = column_name[0:]
     '''------------------回傳資料為各個table及column的順序--------------------'''
@@ -37,7 +38,7 @@ def associated_analysis(associated_table):
                 table.append(result_list)
             finally:
                 connect.close()
-        columns_title = ['Queried %s Term(A)' %queried_feature,'Associated %s Term(B)' %i,'A','B','C', 'D','Signficance of Associated(p-value)','Detail']
+        columns_title = ['Queried %s Term(A)' %queried_feature,'Associated %s Term(B)' %i,'Observed Ratio','Expext Ratio','Signficance of Associated(p-value)','Detail']
         # print(pd.DataFrame(table,columns=columns_title))
         df_tables = pd.DataFrame(table,columns=columns_title).to_html(table_id='%s_table'%i,index= None,classes="table table-striped table-bordered")
         response['%s'%i] = df_tables
@@ -96,7 +97,7 @@ def yeast_enrichment(queried_name,domain_name):
     result = result[result["FDR"]<=0.01]
 
     response = []
-    response.extend([A,len(queried_name),len(domain_name),6611,result.iat[0,1]])
+    response.extend([str(A)+'/'+str(B),str(C)+'/'+str(D),result.iat[0,1]])
     # print(response)
 
     return response

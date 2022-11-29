@@ -13,10 +13,9 @@ $(document).ready(function(){
     $('#queried').html(`<p>Queried ${table_name} Term : ${row_name}`)
     $('#associated_title').html(`<p>Associated Term with the Queried ${table_name} Term `)
 
-    function GO_MFFunction() {window.location.hash = "#GO_MF";}
-    // $('#GO_CC_move').click(function(){window.location.hash = "#GO_CC";})
-    // $('#Protein_Domain_move').on(function(){console.log('13212212123')})
 
+
+    // create a network
 
     $.ajax({
         url : '/yeast/ajax_associated/',
@@ -25,7 +24,20 @@ $(document).ready(function(){
             $('#Answer1').html(response.associated_table);
             $('#associated_table').DataTable();
             column_order = response.all_tables.column_order
-            /* */
+            /* --------------------------network----------------------------*/
+            var data = response.network_data
+            var options = {
+                nodes:{
+                    type:'rectangle'
+                },
+                edges:{
+                    arrows:{
+                        to:{enabled:true, type: 'arrow'}
+                    },
+                }
+            };
+            var container = document.getElementById("mynetwork");
+            var network = new vis.Network(container, data, options);
 
 
             /*-------------- 製作all table的 div 與專屬id ------------------ */
@@ -35,11 +47,11 @@ $(document).ready(function(){
                 add_html = add_html + `<div id = ${column_order[i]}></div>`
                 add_herf = add_herf + `<input id ="${column_order[i]}_move" class="btn btn-outline-primary" type="button" name="Submit" value="${column_order[i]}"  ></input>`
             }
-            console.log(add_herf)
+            console.log(add_html)
             $('#herf_table').html(add_herf)
             $('#Answer2').html(add_html)
             for (i=0 ;i< column_order.length;i++){
-                $(`#${column_order[i]}`).html(response.all_tables[column_order[i]])
+                $(`#${column_order[i]}`).html(`<div class ="fs-3">Feature Name : ${column_order[i]}</div><div>${response.all_tables[column_order[i]]}</div>`)
                 $(`#${column_order[i]}_table`).DataTable({
                     'columnDefs':[
                         {   'targets':-1,
@@ -51,6 +63,9 @@ $(document).ready(function(){
                     ]
                 })
             }
+
+            /*-----------------------------------------------*/
+
         },
         error :function(){
             alert('Something error');
