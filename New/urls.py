@@ -33,4 +33,6 @@ urlpatterns = [
     path('yeast/associated/',views.yeast_associated_base),
     path('yeast/associated/detail/',views.yeast_name_base),
     path('yeast/ajax_name/',views.yeast_name),
+    path('yeast/ajax_modal/',views.yeast_modal),
+
 ]

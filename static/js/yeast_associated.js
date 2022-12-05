@@ -24,12 +24,12 @@ $(document).ready(function(){
             $('#Answer1').html(response.associated_table);
             $('#associated_table').DataTable();
             column_order = response.all_tables.column_order
-            /* --------------------------network----------------------------*/
+            /* --------------------------network graph----------------------------*/
             var data = response.network_data
             var options = {
-                nodes:{
-                    type:'rectangle'
-                },
+                // nodes:{
+                //     type:'rectangle'
+                // },
                 edges:{
                     arrows:{
                         to:{enabled:true, type: 'arrow'}
@@ -59,27 +59,49 @@ $(document).ready(function(){
                             render:function(row){
                                 return '<a href = "/yeast/associated/detail/?id='+ table_name + ':' + row_name +'&name='+ column_order[i]+ ':' +row[1]+'"> Detail </a>';
                             },
+                        },
+                        {   'targets':2,
+                            render:function(data,type,row,meta){
+                                // console.log(row)
+                                a_num = data.split('/')[0]
+                                b_num = data.split('/')[1]
+                                return `<a class="modal_features" href = "#exampleModal" data-bs-toggle="modal" value="${table_name}%${row_name}%${column_order[i]}%${row[1]}" > ${a_num} </a><a>/${b_num}</a>`
+                            },
                         }
                     ]
                 })
             }
-
             /*-----------------------------------------------*/
-
+            $('.modal_features').on("click",function(){
+                var feature_name = $(this).attr('value');
+                console.log(feature_name)
+                $.ajax({
+                    url : '/yeast/ajax_modal/',
+                    data : {'feature_name' : feature_name},
+                    success:function(response){
+                        console.log(response)
+                    },
+                    error :function(){
+                        alert('Something error');
+                    }
+                })
+            })
         },
         error :function(){
             alert('Something error');
         }
     })
 
-    console.log(table_name)
-    console.log(row_name)
 
 })
 
 $(document).on('click','input:button',function(){
     console.log($(this).attr('id').replace('_move',''))
     window.location.href = `#${$(this).attr('id').replace('_move','')}`
+
+
+
+
 });
 // $(document).on('click','#GO_CC_move ',function(){
 //     window.location.href = "#GO_CC";

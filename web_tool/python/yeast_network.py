@@ -19,7 +19,7 @@ def network(associated_table):
     nodes = []
     edges = []
     color = color_dict['%s'%column_name[0]]
-    nodes.append({"id":'0' ,"label":queried_feature ,'color':color})
+    nodes.append({"id":'0' ,"label":queried_feature ,'color':color,'shape':'box'})
     '''---------------------------------加入每個特徵-----------------------------'''
     for i in range(len(column_order)):
         id_num = i+1

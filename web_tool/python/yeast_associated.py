@@ -23,12 +23,18 @@ def associated_analysis(associated_table):
         table = []
         for j in domain_name:
             try:
+                print(j)
                 connect = sqlite3.connect('db.sqlite3')
                 db_cursor = connect.cursor()
-                select = 'SELECT SystematicName FROM ' + i +'_all WHERE '+ i +" IN ('" + j +"')"
-                # print(select)
+                select = f"""
+                    SELECT SystematicName FROM %s_all WHERE %s IN ("%s");
+                """%(i, i, j)
+                print(select)
                 domain_name = db_cursor.execute(select).fetchone()
+                print(domain_name)
+
                 domain_name = domain_name[0]
+                print(domain_name)
                 result_list = yeast_enrichment(queried_name,domain_name)
                 result_list.insert(0,queried_feature)
                 result_list.insert(1,j)

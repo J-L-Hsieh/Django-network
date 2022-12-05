@@ -16,6 +16,7 @@ from webbrowser import get
 from web_tool.python.enrichment import enrichment_program
 from web_tool.python.yeast_associated import associated_analysis
 from web_tool.python.yeast_network import network
+from web_tool.python.yeast_modal import modal
 
 # import web_tool.python.enrichment_program
 
@@ -363,6 +364,7 @@ def mode1(request):
     print(response)
     return  JsonResponse(response)
 '''---------------------------------------browser type----------------------------------------'''
+
 def browser_type(request):
     data = dict(request.POST)
     data = data['checkboxvalue[]']
@@ -405,14 +407,19 @@ def enrichment_analysis(request):
 def yeast_browser(request):
     table_name = request.POST.get('first_feature')
     table_column = request.POST.get('other_feature')[:-1]
-    table_column = "SELECT "+ table_name+ "," + table_column
-    table_name = "FROM "+ table_name +"_all"
-    print(table_column)
-    print(table_name)
+    # table_column = "SELECT "+ table_name+ "," + table_column
+    # table_name = "FROM "+ table_name +"_all"
+
+    sql = f"""
+        SELECT %s %s FROM %s_all;
+    """%(table_name, table_column, table_name)
+    print(sql)
+    # print(table_column)
+    # print(table_name)
     try:
         connect = sqlite3.connect('db.sqlite3')
         select = table_column + ' ' + table_name
-        table = pd.read_sql('%s' %select, connect)
+        table = pd.read_sql(sql, connect)
     finally:
         connect.close()
     table = table.fillna('-')
@@ -430,7 +437,7 @@ def yeast_associated(request):
     row_name = request.POST.get('row_name')
     try:
         connect = sqlite3.connect('db.sqlite3')
-        select = "SELECT * FROM " + table_name +"_all WHERE "+table_name +" IN ('" +row_name +"')"
+        select = f"SELECT * FROM " + table_name +"_all WHERE "+table_name +" IN ('" +row_name +"')"
         print(select)
         table = pd.read_sql('%s' %select, connect)
     finally:
@@ -473,4 +480,9 @@ def yeast_name(request):
     df_merge = df_merge.fillna('false').to_html(table_id='both_name_table',index=None,classes='table table-striped table-bordered')
 
     response = {'df_merge':df_merge}
+    return JsonResponse(response)
+
+def yeast_modal(request):
+    modal(request)
+    response ={'asd':'asd'}
     return JsonResponse(response)
