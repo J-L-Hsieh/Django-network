@@ -8,6 +8,76 @@
 from django.db import models
 
 
+class GoCc1To10(models.Model):
+    go_cc_queried_field = models.TextField(db_column='GO_CC(Queried)', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    count = models.IntegerField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    disease = models.TextField(db_column='Disease', blank=True, null=True)  # Field name made lowercase.
+    genetic_interaction = models.TextField(db_column='Genetic_Interaction', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+    go_bp = models.TextField(db_column='GO_BP', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+    physical_interaction = models.TextField(db_column='Physical_Interaction', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'GO_CC_1_to_10'
+
+
+class GoCcEvidence(models.Model):
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    standardname = models.TextField(db_column='StandardName', blank=True, null=True)  # Field name made lowercase.
+    genedescription = models.TextField(db_column='GeneDescription', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+    evidencecode = models.TextField(db_column='EvidenceCode', blank=True, null=True)  # Field name made lowercase.
+    reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
+    term_link = models.TextField(blank=True, null=True)
+    gene_link = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'GO_CC_evidence'
+
+
+class GoMf1To10(models.Model):
+    go_mf_queried_field = models.TextField(db_column='GO_MF(Queried)', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    count = models.IntegerField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    disease = models.TextField(db_column='Disease', blank=True, null=True)  # Field name made lowercase.
+    genetic_interaction = models.TextField(db_column='Genetic_Interaction', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+    go_bp = models.TextField(db_column='GO_BP', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+    physical_interaction = models.TextField(db_column='Physical_Interaction', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'GO_MF_1_to_10'
+
+
+class GoMfEvidence(models.Model):
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    standardname = models.TextField(db_column='StandardName', blank=True, null=True)  # Field name made lowercase.
+    genedescription = models.TextField(db_column='GeneDescription', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+    evidencecode = models.TextField(db_column='EvidenceCode', blank=True, null=True)  # Field name made lowercase.
+    reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
+    term_link = models.TextField(blank=True, null=True)
+    gene_link = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'GO_MF_evidence'
+
+
 class Gene(models.Model):
     gene_id = models.TextField(db_column='Gene_id', primary_key=True)  # Field name made lowercase.
     transcript_id = models.TextField(db_column='transcript_ID', blank=True, null=True)  # Field name made lowercase.
@@ -16,6 +86,213 @@ class Gene(models.Model):
     class Meta:
         managed = False
         db_table = 'Gene'
+
+
+class GeneticInteraction1To10(models.Model):
+    genetic_interaction_queried_field = models.TextField(db_column='Genetic_Interaction(Queried)', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    count = models.IntegerField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    disease = models.TextField(db_column='Disease', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+    go_bp = models.TextField(db_column='GO_BP', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+    physical_interaction = models.TextField(db_column='Physical_Interaction', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+    genetic_interaction = models.TextField(db_column='Genetic_Interaction', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Genetic_Interaction_1_to_10'
+
+
+class GeneticInteractionEvidence(models.Model):
+    systematicname_bait_field = models.TextField(db_column='SystematicName(Bait)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    standardname_bait_field = models.TextField(db_column='StandardName(Bait)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    systematicname_hit_field = models.TextField(db_column='SystematicName(Hit)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    standardname_hit_field = models.TextField(db_column='StandardName(Hit)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    experimenttype = models.TextField(db_column='ExperimentType', blank=True, null=True)  # Field name made lowercase.
+    reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
+    bait_link = models.TextField(db_column='Bait_link', blank=True, null=True)  # Field name made lowercase.
+    hit_link = models.TextField(db_column='Hit_link', blank=True, null=True)  # Field name made lowercase.
+    term_link = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Genetic_Interaction_evidence'
+
+
+class MutantPhenotype1To10(models.Model):
+    mutant_phenotype_queried_field = models.TextField(db_column='Mutant_Phenotype(Queried)', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    count = models.IntegerField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    disease = models.TextField(db_column='Disease', blank=True, null=True)  # Field name made lowercase.
+    genetic_interaction = models.TextField(db_column='Genetic_Interaction', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+    go_bp = models.TextField(db_column='GO_BP', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+    physical_interaction = models.TextField(db_column='Physical_Interaction', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Mutant_Phenotype_1_to_10'
+
+
+class MutantPhenotypeEvidence(models.Model):
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    standardname = models.TextField(db_column='StandardName', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+    reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
+    term_link = models.TextField(blank=True, null=True)
+    gene_link = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Mutant_Phenotype_evidence'
+
+
+class Pathway1To10(models.Model):
+    pathway_queried_field = models.TextField(db_column='Pathway(Queried)', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    count = models.IntegerField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    disease = models.TextField(db_column='Disease', blank=True, null=True)  # Field name made lowercase.
+    genetic_interaction = models.TextField(db_column='Genetic_Interaction', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+    go_bp = models.TextField(db_column='GO_BP', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+    physical_interaction = models.TextField(db_column='Physical_Interaction', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Pathway_1_to_10'
+
+
+class PathwayEvidence(models.Model):
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    standardname = models.TextField(db_column='StandardName', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+    reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
+    term_link = models.TextField(blank=True, null=True)
+    gene_link = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Pathway_evidence'
+
+
+class PhysicalInteraction1To10(models.Model):
+    physical_interaction_queried_field = models.TextField(db_column='Physical_Interaction(Queried)', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    count = models.IntegerField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    disease = models.TextField(db_column='Disease', blank=True, null=True)  # Field name made lowercase.
+    genetic_interaction = models.TextField(db_column='Genetic_Interaction', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+    go_bp = models.TextField(db_column='GO_BP', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+    physical_interaction = models.TextField(db_column='Physical_Interaction', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Physical_Interaction_1_to_10'
+
+
+class PhysicalInteractionEvidence(models.Model):
+    systematicname_bait_field = models.TextField(db_column='SystematicName(Bait)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    standardname_bait_field = models.TextField(db_column='StandardName(Bait)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    systematicname_hit_field = models.TextField(db_column='SystematicName(Hit)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    standardname_hit_field = models.TextField(db_column='StandardName(Hit)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    experimenttype = models.TextField(db_column='ExperimentType', blank=True, null=True)  # Field name made lowercase.
+    reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
+    bait_link = models.TextField(db_column='Bait_link', blank=True, null=True)  # Field name made lowercase.
+    hit_link = models.TextField(db_column='Hit_link', blank=True, null=True)  # Field name made lowercase.
+    term_link = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Physical_Interaction_evidence'
+
+
+class ProteinDomain1To10(models.Model):
+    protein_domain_queried_field = models.TextField(db_column='Protein_Domain(Queried)', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    count = models.IntegerField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    disease = models.TextField(db_column='Disease', blank=True, null=True)  # Field name made lowercase.
+    genetic_interaction = models.TextField(db_column='Genetic_Interaction', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+    go_bp = models.TextField(db_column='GO_BP', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+    physical_interaction = models.TextField(db_column='Physical_Interaction', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Protein_Domain_1_to_10'
+
+
+class ProteinDomainEvidence(models.Model):
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    standardname = models.TextField(db_column='StandardName', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+    domaindescription = models.TextField(db_column='DomainDescription', blank=True, null=True)  # Field name made lowercase.
+    startcoordinate = models.IntegerField(db_column='StartCoordinate', blank=True, null=True)  # Field name made lowercase.
+    endcoordinate = models.IntegerField(db_column='EndCoordinate', blank=True, null=True)  # Field name made lowercase.
+    term_link = models.TextField(blank=True, null=True)
+    gene_link = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Protein_Domain_evidence'
+
+
+class TranscriptionalRegulation1To10(models.Model):
+    transcriptional_regulation_queried_field = models.TextField(db_column='Transcriptional_Regulation(Queried)', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    count = models.IntegerField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    disease = models.TextField(db_column='Disease', blank=True, null=True)  # Field name made lowercase.
+    genetic_interaction = models.TextField(db_column='Genetic_Interaction', blank=True, null=True)  # Field name made lowercase.
+    go_cc = models.TextField(db_column='GO_CC', blank=True, null=True)  # Field name made lowercase.
+    go_mf = models.TextField(db_column='GO_MF', blank=True, null=True)  # Field name made lowercase.
+    go_bp = models.TextField(db_column='GO_BP', blank=True, null=True)  # Field name made lowercase.
+    pathway = models.TextField(db_column='Pathway', blank=True, null=True)  # Field name made lowercase.
+    mutant_phenotype = models.TextField(db_column='Mutant_Phenotype', blank=True, null=True)  # Field name made lowercase.
+    physical_interaction = models.TextField(db_column='Physical_Interaction', blank=True, null=True)  # Field name made lowercase.
+    protein_domain = models.TextField(db_column='Protein_Domain', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Transcriptional_Regulation_1_to_10'
+
+
+class TranscriptionalRegulationEvidence(models.Model):
+    regulator = models.TextField(blank=True, null=True)
+    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
+    standardname = models.TextField(db_column='StandardName', blank=True, null=True)  # Field name made lowercase.
+    transcriptional_regulation = models.TextField(db_column='Transcriptional_Regulation', blank=True, null=True)  # Field name made lowercase.
+    reference = models.TextField(db_column='Reference', blank=True, null=True)  # Field name made lowercase.
+    term_link = models.TextField(blank=True, null=True)
+    gene_link = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Transcriptional_Regulation_evidence'
 
 
 class AuthGroup(models.Model):
@@ -84,25 +361,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
-class DiseaseAll(models.Model):
-    disease = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'disease_all'
-
-
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -147,176 +405,20 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class GeneticInteractionAll(models.Model):
-    genetic_interaction = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    genetic_interaction_1 = models.TextField(db_column='genetic_interaction.1', blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
+class FinalResultWt1HrdeipWs285AllWithIdtype(models.Model):
+    input_id = models.TextField(blank=True, null=True)
+    ref_id = models.TextField(blank=True, null=True)
+    wormbase_id = models.TextField(db_column='WormBase_ID', blank=True, null=True)  # Field name made lowercase.
+    type = models.TextField(blank=True, null=True)
+    init_pos = models.IntegerField(blank=True, null=True)
+    end_pos = models.IntegerField(blank=True, null=True)
+    read_count = models.IntegerField(blank=True, null=True)
+    field_ofanswers = models.IntegerField(db_column='#ofanswers', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
+    evenly_rc = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'genetic_interaction_all'
-
-
-class GoCAll(models.Model):
-    go_c = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'go_c_all'
-
-
-class GoFAll(models.Model):
-    go_f = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'go_f_all'
-
-
-class GoPAll(models.Model):
-    go_p = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'go_p_all'
-
-
-class PathwayAll(models.Model):
-    pathway = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'pathway_all'
-
-
-class PhenotypeAll(models.Model):
-    phenotype = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'phenotype_all'
-
-
-class PhysicalInteractionAll(models.Model):
-    physical_interaction = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'physical_interaction_all'
-
-
-class ProteinDomainAll(models.Model):
-    protein_domain = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_regulator = models.TextField(db_column='Associated_regulator', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'protein_domain_all'
-
-
-class RegulatorAll(models.Model):
-    regulator = models.TextField(primary_key=True)
-    count = models.IntegerField(blank=True, null=True)
-    systematicname = models.TextField(db_column='SystematicName', blank=True, null=True)  # Field name made lowercase.
-    associated_disease = models.TextField(db_column='Associated_disease', blank=True, null=True)  # Field name made lowercase.
-    associated_genetic_interaction = models.TextField(db_column='Associated_genetic_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_go_c = models.TextField(db_column='Associated_go_c', blank=True, null=True)  # Field name made lowercase.
-    associated_go_f = models.TextField(db_column='Associated_go_f', blank=True, null=True)  # Field name made lowercase.
-    associated_go_p = models.TextField(db_column='Associated_go_p', blank=True, null=True)  # Field name made lowercase.
-    associated_pathway = models.TextField(db_column='Associated_pathway', blank=True, null=True)  # Field name made lowercase.
-    associated_phenotype = models.TextField(db_column='Associated_phenotype', blank=True, null=True)  # Field name made lowercase.
-    associated_physical_interaction = models.TextField(db_column='Associated_physical_interaction', blank=True, null=True)  # Field name made lowercase.
-    associated_protein_domain = models.TextField(db_column='Associated_protein_domain', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'regulator_all'
+        db_table = 'final_result_WT1_HRDEIP_WS285_all_with_idtype'
 
 
 class TranscriptWbidType(models.Model):

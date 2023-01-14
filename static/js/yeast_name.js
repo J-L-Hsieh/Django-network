@@ -7,8 +7,8 @@ $(document).ready(function() {
     const urlParams = new URLSearchParams(queryString);
     const first_feature = urlParams.get('id')
     const second_feature = urlParams.get('name')
-    var first_feature_array = first_feature.split(':')
-    var second_feature_array = second_feature.split(':')
+    var first_feature_array = first_feature.split('$')
+    var second_feature_array = second_feature.split('$')
 
     $('#first').html(`<p>Queried : ${first_feature_array[0]}  Term : ${first_feature_array[1]}`)
     $('#second').html(`<p>Feature : ${second_feature_array[0]}  Term : ${second_feature_array[1]}`)

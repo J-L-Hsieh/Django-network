@@ -235,13 +235,13 @@ $(document).ready(function(){
         const length = feature_data.map(i=> i.stop)
         const xscale = d3.scaleLinear()
                         .domain([0,d3.max(length)])
-                        .range([0,800])
+                        .range([0,1200])
 
 
         const svg = d3
             .select('.stack_unspliced')
             .append('svg')
-            .attr('width', 800)
+            .attr('width', 1200)
             .attr('height', 50)
             .selectAll('rect')
             .data(feature_data)
@@ -283,7 +283,7 @@ $(document).ready(function(){
                 tooltips.style("opacity", 0)
             });
     };
-    // ----------------------------------------------------------------
+    // ---------------------------------D3_spliced-------------------------------
     function D3_spliced(feature){
         // console.log(feature)
         let feature_data1 = feature;
@@ -303,19 +303,19 @@ $(document).ready(function(){
         const length = feature_data1.map(i=> i.stop)
         const xscale = d3.scaleLinear()
                         .domain([0,d3.max(length)])
-                        .range([0,800])
+                        .range([0,1200])
 
 
         const svg2 = d3
             .select('.stack_spliced')
             .append('svg')
-            .attr('width', 800)
+            .attr('width', 1200)
             .attr('height', 50)
             .selectAll('rect')
             .data(feature_data1)
             .enter()
             .append('rect')
-            .attr('width', d => xscale(d.stop -d.start))
+            .attr('width', d => xscale(d.stop - d.start))
             .attr('x', d => xscale(d.start))
             .attr('fill', d => colorScale(d.type))
             .attr('y', d => yScale(d.type))

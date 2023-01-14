@@ -1,9 +1,8 @@
 import pandas as pd
 import sqlite3
 
-
-color_dict = {'GO_MF':'#E6AA68' ,'GO_BP':'#FFFBBD' ,'GO_CC':'#7FB069' ,'Protein_Domain':'#CA3C25' ,'Mutant_Phenotype':'#7EBDC2' ,'Pathway':'#FFDDD2' ,'Disease':'#254441' ,'Transcriptional_Regulation':'#B38D97' ,'Physical_Interaction':'#E3E4DB','Genetic_Interaction':'#CDCDCD'}
-
+color_dict = {'GO_MF':'darkseagreen' ,'GO_BP':'darksalmon' ,'GO_CC':'lightskyblue' ,'Protein_Domain':'plum' ,'Mutant_Phenotype':'coral' ,'Pathway':'grey' ,'Disease':'mistyrose' ,'Transcriptional_Regulation':'deepskyblue' ,'Physical_Interaction':'gold','Genetic_Interaction':'teal',
+            'GO_MF(Queried)':'darkseagreen' ,'GO_BP(Queried)':'darksalmon' ,'GO_CC(Queried)':'lightskyblue' ,'Protein_Domain(Queried)':'plum' ,'Mutant_Phenotype(Queried)':'coral' ,'Pathway(Queried)':'grey' ,'Disease(Queried)':'mistyrose' ,'Transcriptional_Regulation(Queried)':'deepskyblue' ,'Physical_Interaction(Queried)':'gold','Genetic_Interaction(Queried)':'teal'}
 
 def network(associated_table):
     associated_table = pd.DataFrame(associated_table)
@@ -18,8 +17,9 @@ def network(associated_table):
     associated_table.drop(associated_table.columns[[0]],axis=1,inplace=True)
     nodes = []
     edges = []
+    print(column_name)
     color = color_dict['%s'%column_name[0]]
-    nodes.append({"id":'0' ,"label":queried_feature ,'color':color,'shape':'box'})
+    nodes.append({"id":'0', 'group':queried_feature, "label":queried_feature, 'color':color, 'type':'main', 'shape':'box'})
     '''---------------------------------加入每個特徵-----------------------------'''
     for i in range(len(column_order)):
         id_num = i+1
@@ -32,9 +32,9 @@ def network(associated_table):
         '''------------------------------加入個特徵下的各個類別-------------------------'''
 
         for j in range(len(domain_name)):
-            nodes.append({'id':'{feature}_{name_in_feature}'.format(feature = id_num, name_in_feature = j), 'label':domain_name[j] ,'color':color})
+            nodes.append({'id':'{feature}_{name_in_feature}'.format(feature = id_num, name_in_feature = j), 'color':color,'type':column_order[i], 'group':domain_name[j], 'label':domain_name[j] })
             edges.append({'from':0, 'to':'{feature}_{name_in_feature}'.format(feature = id_num, name_in_feature = j),'color':color})
-
+        print(column_order[i])
 
 
     response = {'nodes':nodes, 'edges':edges}

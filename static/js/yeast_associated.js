@@ -25,10 +25,23 @@ $(document).ready(function(){
             $('#associated_table').DataTable();
             column_order = response.all_tables.column_order
             /* --------------------------network graph----------------------------*/
-            var data = response.network_data
-            var options = {
+            for (i=0 ;i<column_order.length; i++){
+                $('#nodeFilterSelect').append(`<option value=${column_order[i]}>${column_order[i]}</option>`)
+            }
+
+            const nodeFilterSelector = document.getElementById("nodeFilterSelect");
+
+
+            function startNetwork(data) {
+            const container = document.getElementById("mynetwork");
+            const options = {
+                autoResize:true,
+
+                interaction:{
+                    hover: true
+                },
                 // nodes:{
-                //     type:'rectangle'
+                //     physics:false
                 // },
                 edges:{
                     arrows:{
@@ -36,8 +49,67 @@ $(document).ready(function(){
                     },
                 }
             };
-            var container = document.getElementById("mynetwork");
-            var network = new vis.Network(container, data, options);
+            const network = new vis.Network(container, data, options);
+
+            // 設置固定位置設定
+
+            network.on("dragEnd", function(params){
+                if (params.nodes&&params.nodes.length > 0){
+                    network.clustering.updateClusteredNode(params.nodes[0], {physics : false});
+                }
+            });
+            }
+
+            // create an array with nodes
+            var nodes = new vis.DataSet(response.network_data.nodes);
+            console.log(nodes)
+            // create an array with edges
+            var edges = new vis.DataSet(response.network_data.edges);
+
+            let nodeFilterValue = "";
+
+            const nodesFilter = (node) => {
+            if (nodeFilterValue === "") {
+                return true;
+            }
+
+            switch (nodeFilterValue) {
+                case "GO_MF"||"main":
+                return node.type === "GO_MF"|| node.type ==="main";
+                case "GO_BP"||"main":
+                return node.type === "GO_BP"|| node.type ==="main";
+                case "GO_CC"||"main":
+                return node.type === "GO_CC"|| node.type ==="main";
+                case "Protein_Domain"||"main":
+                return node.type === "Protein_Domain"|| node.type ==="main";
+                case "Phenotype"||"main":
+                return node.type === "Phenotype"|| node.type ==="main";
+                case "Disease"||"main":
+                return node.type === "Disease"|| node.type ==="main";
+                case "Physical_Interaction"||"main":
+                return node.type === "Physical_Interaction"|| node.type ==="main";
+                case "Genetic_Interaction"||"main":
+                return node.type === "Genetic_Interaction"|| node.type ==="main";
+                case "Pathway"||"main":
+                return node.type === "Pathway"|| node.type ==="main";
+                case "Transcriptional_Regulation"||"main":
+                return node.type === "Transcriptional_Regulation"|| node.type ==="main";
+                default:
+                return true;
+            }
+            };
+
+            const nodesView = new vis.DataView(nodes, { filter: nodesFilter });
+            const edgesView = new vis.DataView(edges);
+
+            nodeFilterSelector.addEventListener("change", (e) => {
+            // set new value to filter variable
+            nodeFilterValue = e.target.value;
+
+            nodesView.refresh();
+            });
+
+            startNetwork({ nodes: nodesView, edges: edgesView });
 
 
             /*-------------- 製作all table的 div 與專屬id ------------------ */
@@ -57,7 +129,7 @@ $(document).ready(function(){
                         {   'targets':-1,
                             'data':null,
                             render:function(row){
-                                return '<a href = "/yeast/associated/detail/?id='+ table_name + ':' + row_name +'&name='+ column_order[i]+ ':' +row[1]+'"> Detail </a>';
+                                return '<a href = "/yeast/associated/detail/?id='+ table_name + '$' + row_name +'&name='+ column_order[i]+ '$' +row[1]+'"> Detail </a>';
                             },
                         },
                         {   'targets':2,
@@ -71,7 +143,7 @@ $(document).ready(function(){
                     ]
                 })
             }
-            /*-----------------------------------------------*/
+            /*------------------------modal-----------------------*/
             $('.modal_features').on("click",function(){
                 var feature_name = $(this).attr('value');
                 console.log(feature_name)
@@ -79,7 +151,8 @@ $(document).ready(function(){
                     url : '/yeast/ajax_modal/',
                     data : {'feature_name' : feature_name},
                     success:function(response){
-                        console.log(response)
+                        $(`#modal_table`).html(response.evidence_table)
+                        $('#evidence_table').DataTable()
                     },
                     error :function(){
                         alert('Something error');
@@ -90,11 +163,8 @@ $(document).ready(function(){
         error :function(){
             alert('Something error');
         }
-    })
-
-
+    });
 })
-
 $(document).on('click','input:button',function(){
     console.log($(this).attr('id').replace('_move',''))
     window.location.href = `#${$(this).attr('id').replace('_move','')}`
@@ -109,3 +179,81 @@ $(document).on('click','input:button',function(){
 // $(document).on('click','#GO_BP_move ',function(){
 //     window.location.href = "#GO_CC";
 // });
+// 畫關聯圖
+        //     for (i=0 ;i<all_title_name.length; i++){
+        //         $('#nodeFilterSelect').append(<option value=${all_title_name[i]}>${all_title_name[i]}</option>)
+        //     }
+
+        //     const nodeFilterSelector = document.getElementById("nodeFilterSelect");
+
+
+        //     function startNetwork(data) {
+        //     const container = document.getElementById("mynetwork");
+        //     const options = {
+        //         autoResize:true,
+
+        //         interaction:{
+        //             hover: true
+        //         },
+        //     };
+        //     const network = new vis.Network(container, data, options);
+
+        //     // 設置固定位置設定
+        //     network.on("dragEnd", function(params){
+        //         if(params.nodes&&params.nodes.length>0){
+        //             network.clustering.updateClusteredNode(params.nodes[0], {physics:false});
+        //         }
+        //     });
+        //     }
+
+        //     // create an array with nodes
+        //     var nodes = new vis.DataSet(response.data_node);
+
+        //     // create an array with edges
+        //     var edges = new vis.DataSet(response.data_relation);
+
+        //     let nodeFilterValue = "";
+
+        //     const nodesFilter = (node) => {
+        //     if (nodeFilterValue === "") {
+        //         return true;
+        //     }
+
+        //     switch (nodeFilterValue) {
+        //         case "Associated_go_f"||"main":
+        //         return node.type === "Associated_go_f"|| node.type ==="main";
+        //         case "Associated_go_p"||"main":
+        //         return node.type === "Associated_go_p"|| node.type ==="main";
+        //         case "Associated_go_c"||"main":
+        //         return node.type === "Associated_go_c"|| node.type ==="main";
+        //         case "Associated_protein_domain"||"main":
+        //         return node.type === "Associated_protein_domain"|| node.type ==="main";
+        //         case "Associated_phenotype"||"main":
+        //         return node.type === "Associated_phenotype"|| node.type ==="main";
+        //         case "Associated_disease"||"main":
+        //         return node.type === "Associated_disease"|| node.type ==="main";
+        //         case "Associated_physical_interaction"||"main":
+        //         return node.type === "Associated_physical_interaction"|| node.type ==="main";
+        //         case "Associated_genetic_interaction"||"main":
+        //         return node.type === "Associated_genetic_interaction"|| node.type ==="main";
+        //         case "Associated_pathway"||"main":
+        //         return node.type === "Associated_pathway"|| node.type ==="main";
+        //         case "Associated_regulator"||"main":
+        //         return node.type === "Associated_regulator"|| node.type ==="main";
+        //         default:
+        //         return true;
+        //     }
+        //     };
+
+        //     const nodesView = new vis.DataView(nodes, { filter: nodesFilter });
+        //     const edgesView = new vis.DataView(edges);
+
+        //     nodeFilterSelector.addEventListener("change", (e) => {
+        //     // set new value to filter variable
+        //     nodeFilterValue = e.target.value;
+
+        //     nodesView.refresh();
+        //     });
+
+        //     startNetwork({ nodes: nodesView, edges: edgesView });
+        // },

@@ -14,28 +14,45 @@ def modal(request):
         connect = sqlite3.connect('db.sqlite3')
         db_cursor = connect.cursor()
 
-        select = 'SELECT SystematicName FROM ' + feature1 +'_all WHERE '+ feature1 +" IN ('" +name1 +"')"
+        select = 'SELECT SystematicName FROM ' + feature1 +'_1_to_10 WHERE '+ feature1 +" IN ('" +name1 +"')"
         db_cursor.execute(select)
         sys_name1 = db_cursor.fetchall()
         sys_name1_set = set(eval(sys_name1[0][0]))
 
         # print('---------------')
 
-        select = 'SELECT SystematicName FROM ' + feature2 +'_all WHERE '+ feature2 +" IN ('" + name2 +"')"
+        select = 'SELECT SystematicName FROM ' + feature2 +'_1_to_10 WHERE '+ feature2 +" IN ('" + name2 +"')"
         db_cursor.execute(select )
         sys_name2 = db_cursor.fetchall()
         sys_name2_set = set(eval(sys_name2[0][0]))
         intersection = str(tuple(sys_name1_set.intersection(sys_name2_set)))
         print(intersection)
-        if feature1 == 'Physical_Interation':
-            select = "SELECT * FROM " + feature1 + "_evidence WHERE SystematicName IN" + intersection
-        elif feature1 == 'Genetic_Interation':
-            pass
+        print(feature1)
+        '''-------------------------依照主要的feature取出證據檔------------------'''
+        if feature1 == 'Physical_Interaction':
+            select = f"""
+                SELECT * FROM %s_evidence WHERE `SystematicName(Bait)` IN %s OR `SystematicName(Hit)` IN %s
+            """%(feature1, intersection,intersection)
+            evidence_table = pd.read_sql(select , connect)
+
+
+        elif feature1 == 'Genetic_Interaction':
+            select = f"""
+                SELECT * FROM %s_evidence WHERE `SystematicName(Bait)` IN %s OR `SystematicName(Hit)` IN %s
+            """%(feature1, intersection,intersection)
+            evidence_table = pd.read_sql(select , connect)
+
         else:
-            select = "SELECT * FROM " + feature1 + "_evidence WHERE SystematicName IN" + intersection
+            select = f"""
+                SELECT * FROM %s_evidence WHERE SystematicName IN %s
+            """%(feature1, intersection)
             evidence_table = pd.read_sql(select , connect)
     finally:
         connect.close()
     print(evidence_table)
-    response = {'asd':'asdadasdasda'}
-    return response
+    print('-------------')
+    result = evidence_table.to_json(orient="records")
+    print(result)
+
+    evidence_table = evidence_table.to_html(table_id='evidence_table', index= None, classes="table table-striped table-bordered", escape=False)
+    return evidence_table

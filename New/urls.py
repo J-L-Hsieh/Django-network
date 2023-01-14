@@ -14,6 +14,8 @@ urlpatterns = [
     path('detail/ajax_detail/',views.ajax_crawler),
     re_path(r'detail/(?P<pk>.+)/',views.detail),
 
+    path('result/', views.result_base),
+    path('result/result_ajax/', views.result_pirscan),
 
     path('web_tool/ajax_wormbase/', views.ajax_wormbase),
     path('web_tool/ajax_data/', views.ajax_data),

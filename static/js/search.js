@@ -6,10 +6,11 @@ $.ajaxSetup({
 $(document).ready(function(){
 
     $('#submit_mode1').click(function(){
+        console.log($('#search_mode1').serialize())
+
         $.ajax({
             url: 'ajax_mode1/',
             data: $('#search_mode1').serialize(),
-
             success: function(response){
                 var data = response
                 // console.log(typeof(data))
@@ -48,8 +49,12 @@ $(document).ready(function(){
                             }},
                             {data : 'gene_type', title: 'gene_type'},
                             {data : 'transcript' ,title:'PirScan',
-                            render: function (data, type, row) {
-                                return `<a type="text" " class="card-link">${'Pirscan'}</a>`}},
+                                'render': function (data, type, row, meta) {
+                                    data = `<a href ="/result/?id=${data}">tool</a>`;
+
+                                    return data;
+                                }
+                            },
                         ],
                         "createdRow": function( row, data, dataIndex) {
                                 if ( data.transcript == search ) {

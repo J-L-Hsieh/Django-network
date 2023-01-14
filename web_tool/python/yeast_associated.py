@@ -15,7 +15,6 @@ def associated_analysis(associated_table):
     column_order = column_name[0:]
     '''------------------回傳資料為各個table及column的順序--------------------'''
     response ={}
-
     for i in column_name:
         # print(i)
         # print(associated_table.at[0,'%s' %i])
@@ -27,7 +26,7 @@ def associated_analysis(associated_table):
                 connect = sqlite3.connect('db.sqlite3')
                 db_cursor = connect.cursor()
                 select = f"""
-                    SELECT SystematicName FROM %s_all WHERE %s IN ("%s");
+                    SELECT SystematicName FROM %s_1_to_10 WHERE `%s(Queried)` IN ('%s');
                 """%(i, i, j)
                 print(select)
                 domain_name = db_cursor.execute(select).fetchone()
